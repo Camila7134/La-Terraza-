@@ -2,6 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>La Terraza · Horario Semanal Editable</title>
@@ -9,14 +12,14 @@
 :root{
   --black:#131313;
   --black2:#1c1b19;
-  --cream:#f8f1e7;
-  --ivory:#f1e8d8;
-  --champ:#ddb875;
-  --rose:#c9a5aa;
-  --sage:#a7b09a;
-  --gold:#c69a52;
-  --line:#d7c19d;
-  --card:#fffaf3;
+  --cream:#f4f4f1;
+  --ivory:#ececea;
+  --champ:#d6d6d2;
+  --rose:#b8b8b5;
+  --sage:#9ea39c;
+  --gold:#d9d9d5;
+  --line:#cacac5;
+  --card:#ffffff;
   --ink:#171614;
 }
 *{box-sizing:border-box}
@@ -41,9 +44,9 @@ button{cursor:pointer}
 .logo{display:block;width:min(510px,76%);height:auto;margin:0 auto 9px}
 .header h1{
   font-family:Georgia,"Times New Roman",serif;font-size:clamp(33px,5.2vw,55px);font-weight:400;
-  letter-spacing:3px;color:#efd7aa;margin:4px 0 9px
+  letter-spacing:3px;color:#ffffff;margin:4px 0 9px
 }
-.weekControls{display:flex;gap:9px 13px;justify-content:center;align-items:center;flex-wrap:wrap;color:#e1c289;font-weight:700}
+.weekControls{display:flex;gap:9px 13px;justify-content:center;align-items:center;flex-wrap:wrap;color:#ddddda;font-weight:700}
 .weekControls input{
   min-height:44px;background:#26231e;color:#f4dfb8;border:1px solid #78613d;padding:5px 8px;
   border-radius:8px;font-size:16px
@@ -58,7 +61,7 @@ button{cursor:pointer}
 table{width:100%;border-collapse:collapse}
 .schedule{min-width:930px;table-layout:fixed}
 .schedule th{
-  height:54px;background:#191919;color:#f1d8aa;border-right:1px solid #816944;border-bottom:1px solid #816944;
+  height:54px;background:#191919;color:#ffffff;border-right:1px solid #816944;border-bottom:1px solid #816944;
   padding:6px;font-size:15px
 }
 .schedule th:first-child{width:160px;position:sticky;left:0;z-index:6}
@@ -109,10 +112,14 @@ table{width:100%;border-collapse:collapse}
 .shiftCell.s2{background:var(--ivory)!important;color:#171614}
 .shiftCell.free{background:var(--rose)!important;color:white}
 .shiftCell.psg{background:var(--sage)!important;color:white}
-.shiftCell:has(option[value="06:00 a 02:00"]:checked){background:var(--champ)!important;color:#171614}
-.shiftCell:has(option[value="02:00 a 10:00"]:checked){background:var(--ivory)!important;color:#171614}
+.shiftCell.s3{background:#C6B2D8!important;color:#171614}
+.shiftCell.vac{background:#93B7D1!important;color:#171614}
+.shiftCell:has(option[value="06:00 AM a 02:00 PM"]:checked){background:var(--champ)!important;color:#171614}
+.shiftCell:has(option[value="02:00 PM a 10:00 PM"]:checked){background:var(--ivory)!important;color:#171614}
 .shiftCell:has(option[value="LIBRE"]:checked){background:var(--rose)!important;color:white}
 .shiftCell:has(option[value="PSG"]:checked){background:var(--sage)!important;color:white}
+.shiftCell:has(option[value="11:00 AM a 07:00 PM"]:checked){background:#C6B2D8!important;color:#171614}
+.shiftCell:has(option[value="VACACIONES"]:checked){background:#93B7D1!important;color:#171614}
 .shiftCell::before{
   content:attr(data-label);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   padding:8px 21px 8px 7px;white-space:pre-line;text-align:center;line-height:1.15;font-size:16px;
@@ -133,9 +140,9 @@ table{width:100%;border-collapse:collapse}
 .legendItem{display:flex;gap:7px;align-items:center}
 .sw{width:25px;height:19px;border:1px solid rgba(0,0,0,.1)}
 .reminder{text-align:center;margin-top:14px;color:#42372a;font-weight:800}
-.footer{background:#111;border-top:2px solid var(--gold);color:#dab874;text-align:center;padding:16px 20px 18px}
+.footer{background:#111;border-top:2px solid var(--gold);color:#ffffff;text-align:center;padding:16px 20px 18px}
 .footer strong{font-family:Georgia,"Times New Roman",serif;font-size:28px;letter-spacing:3px;font-weight:400}
-.footer div{font-size:11px;letter-spacing:3px;color:#edd8b0;margin-top:3px}
+.footer div{font-size:11px;letter-spacing:3px;color:#d8d8d4;margin-top:3px}
 
 /* Dynamic assignment cards */
 .assignmentToolbar{
@@ -148,11 +155,16 @@ table{width:100%;border-collapse:collapse}
 .daysGrid{display:grid;gap:12px}
 .dayCard{border:1px solid #c7a974;border-radius:12px;overflow:hidden;background:#fffaf3}
 .dayTitle{
-  background:#191919;color:#f1d8aa;padding:12px 14px;font-weight:900;letter-spacing:.5px;font-size:18px
+  background:#191919;color:#ffffff;padding:12px 14px;font-weight:900;letter-spacing:.5px;font-size:18px
 }
-.shiftGrid{display:grid;grid-template-columns:1fr 1fr}
+.shiftGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
 .shiftBlock{padding:12px;border-right:1px solid #d8c3a1}
 .shiftBlock:last-child{border-right:0}
+
+.shiftBlock:nth-child(1){background:#F4E8CF}
+.shiftBlock:nth-child(2){background:#F2EEE6}
+.shiftBlock:nth-child(3){background:#EAE3F0}
+
 .shiftHead{
   display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px;
   font-weight:900;color:#5b472c;font-size:16px
@@ -162,15 +174,24 @@ table{width:100%;border-collapse:collapse}
 }
 .assignmentList{display:grid;gap:8px}
 .assignmentRow{
-  display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr) 36px;gap:6px;align-items:center
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:8px;align-items:center
 }
 .assignmentRow select{
   min-width:0;width:100%;min-height:46px;border:1px solid #cdb488;border-radius:8px;
   background:#fff;color:#282016;padding:6px 8px;font-size:17px
 }
 .assignmentRow .roleSelect{background:#f3e7d4}
-.assignmentRow .removeAssignment{
-  width:36px;height:36px;border:0;border-radius:50%;background:#efe1cf;color:#815438;font-weight:900;font-size:18px
+.employeeDisplay{
+  min-height:46px;
+  display:flex;
+  align-items:center;
+  padding:8px 11px;
+  border:1px solid #cdb488;
+  border-radius:8px;
+  background:#fff;
+  color:#282016;
+  font-size:17px;
+  font-weight:900
 }
 .emptyShift{
   padding:11px;border:1px dashed #d0b88e;border-radius:8px;color:#8a7657;text-align:center;font-size:13px
@@ -197,7 +218,7 @@ table{width:100%;border-collapse:collapse}
   .shiftGrid{grid-template-columns:1fr}
   .shiftBlock{border-right:0;border-bottom:1px solid #d8c3a1}
   .shiftBlock:last-child{border-bottom:0}
-  .assignmentRow{grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr) 36px}
+  .assignmentRow{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
 }
 @media print{
   .toolbar,.sectionActions,.assignmentToolbar,.modal{display:none!important}
@@ -244,10 +265,12 @@ table{width:100%;border-collapse:collapse}
       </table>
     </div>
     <div class="legend">
-      <span class="legendItem"><i class="sw" style="background:#ddb875"></i>06:00 a 02:00</span>
-      <span class="legendItem"><i class="sw" style="background:#f1e8d8"></i>02:00 a 10:00</span>
-      <span class="legendItem"><i class="sw" style="background:#c9a5aa"></i>LIBRE</span>
-      <span class="legendItem"><i class="sw" style="background:#a7b09a"></i>PSG</span>
+      <span class="legendItem"><i class="sw" style="background:#D9B36C"></i>06:00 AM a 02:00 PM</span>
+      <span class="legendItem"><i class="sw" style="background:#F4E8CF"></i>02:00 PM a 10:00 PM</span>
+      <span class="legendItem"><i class="sw" style="background:#C6B2D8"></i>11:00 AM a 07:00 PM</span>
+      <span class="legendItem"><i class="sw" style="background:#D7A3AD"></i>LIBRE</span>
+      <span class="legendItem"><i class="sw" style="background:#93B7D1"></i>VACACIONES</span>
+      <span class="legendItem"><i class="sw" style="background:#9EB792"></i>PSG</span>
     </div>
     <div class="reminder">Presentarse 10 minutos antes del inicio del turno.</div>
   </div>
@@ -262,12 +285,11 @@ table{width:100%;border-collapse:collapse}
   </div>
   <div class="content">
     <div class="assignmentToolbar">
-      <div class="tip">Selecciona empleado + puesto. Usa ＋ para agregar más personas a cualquier turno.</div>
-      <button type="button" onclick="rebuildAssignmentEmployeeOptions()">↻ Actualizar nombres</button>
+      <div class="tip"><b>✓ ASIGNACIÓN AUTOMÁTICA ACTIVA:</b> los nombres y turnos se cargan desde el horario de arriba. Aquí únicamente selecciona el puesto.</div>
     </div>
     <div class="daysGrid" id="daysGrid"></div>
     <div class="roleNote"><span><b>Caja</b> · cobros</span><span><b>Bar</b> · bebidas</span><span><b>Salón</b> · servicio a mesas</span></div>
-    <div class="reminder">Revisar la asignación antes de iniciar el turno.</div>
+    <div class="reminder">Los nombres se cargan automáticamente según el horario. Solo selecciona el puesto.</div>
   </div>
   <div class="footer"><strong>LA TERRAZA</strong><div>CAFÉ · BAR · RESTAURANTE</div></div>
 </section>
@@ -285,19 +307,15 @@ table{width:100%;border-collapse:collapse}
 </div>
 
 <script>
-const INITIAL = {"employees": [{"name": "AILYN", "shifts": ["06:00 a 02:00", "06:00 a 02:00", "06:00 a 02:00", "06:00 a 02:00", "06:00 a 02:00", "LIBRE", "06:00 a 02:00"]}, {"name": "GUMMY", "shifts": ["02:00 a 10:00", "02:00 a 10:00", "02:00 a 10:00", "LIBRE", "02:00 a 10:00", "02:00 a 10:00", "02:00 a 10:00"]}, {"name": "HILLARY", "shifts": ["02:00 a 10:00", "06:00 a 02:00", "06:00 a 02:00", "06:00 a 02:00", "06:00 a 02:00", "06:00 a 02:00", "LIBRE"]}, {"name": "HARLEY", "shifts": ["02:00 a 10:00", "LIBRE", "PSG", "02:00 a 10:00", "02:00 a 10:00", "02:00 a 10:00", "02:00 a 10:00"]}, {"name": "MARILYN", "shifts": ["06:00 a 02:00", "02:00 a 10:00", "02:00 a 10:00", "02:00 a 10:00", "LIBRE", "06:00 a 02:00", "06:00 a 02:00"]}, {"name": "EDDY", "shifts": ["LIBRE", "02:00 a 10:00", "02:00 a 10:00", "02:00 a 10:00", "02:00 a 10:00", "02:00 a 10:00", "02:00 a 10:00"]}], "assignments": [{"morning": [{"employee": "AILYN", "role": "Caja"}, {"employee": "MARILYN", "role": "Bar"}], "afternoon": [{"employee": "GUMMY", "role": "Bar"}, {"employee": "HILLARY", "role": "Caja"}, {"employee": "HARLEY", "role": "Salón"}]}, {"morning": [{"employee": "AILYN", "role": "Bar"}, {"employee": "HILLARY", "role": "Caja"}], "afternoon": [{"employee": "GUMMY", "role": "Bar"}, {"employee": "MARILYN", "role": "Salón"}, {"employee": "EDDY", "role": "Caja"}]}, {"morning": [{"employee": "AILYN", "role": "Bar"}, {"employee": "HILLARY", "role": "Caja"}], "afternoon": [{"employee": "MARILYN", "role": "Bar"}, {"employee": "HARLEY", "role": "Salón"}, {"employee": "EDDY", "role": "Caja"}]}, {"morning": [{"employee": "AILYN", "role": "Bar"}, {"employee": "HILLARY", "role": "Caja"}], "afternoon": [{"employee": "MARILYN", "role": "Bar"}, {"employee": "EDDY", "role": "Caja"}, {"employee": "HARLEY", "role": "Salón"}]}, {"morning": [{"employee": "AILYN", "role": "Bar"}, {"employee": "HILLARY", "role": "Caja"}], "afternoon": [{"employee": "EDDY", "role": "Caja"}, {"employee": "GUMMY", "role": "Bar"}, {"employee": "HARLEY", "role": "Salón"}]}, {"morning": [{"employee": "HILLARY", "role": "Caja"}, {"employee": "MARILYN", "role": "Bar"}], "afternoon": [{"employee": "EDDY", "role": "Caja"}, {"employee": "GUMMY", "role": "Bar"}, {"employee": "HARLEY", "role": "Salón"}]}, {"morning": [{"employee": "AILYN", "role": "Caja"}, {"employee": "MARILYN", "role": "Bar"}], "afternoon": [{"employee": "EDDY", "role": "Caja"}, {"employee": "GUMMY", "role": "Bar"}, {"employee": "HARLEY", "role": "Salón"}]}]};
-const KEY = "laTerrazaDynamicV14";
-const SHIFT_STATES = ["06:00 a 02:00","02:00 a 10:00","LIBRE","PSG"];
+const INITIAL = {"employees": [{"name": "AILYN", "shifts": ["06:00 AM a 02:00 PM", "06:00 AM a 02:00 PM", "06:00 AM a 02:00 PM", "06:00 AM a 02:00 PM", "06:00 AM a 02:00 PM", "LIBRE", "06:00 AM a 02:00 PM"]}, {"name": "GUMMY", "shifts": ["02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM", "LIBRE", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM"]}, {"name": "HILLARY", "shifts": ["02:00 PM a 10:00 PM", "06:00 AM a 02:00 PM", "06:00 AM a 02:00 PM", "06:00 AM a 02:00 PM", "06:00 AM a 02:00 PM", "06:00 AM a 02:00 PM", "LIBRE"]}, {"name": "HARLEY", "shifts": ["02:00 PM a 10:00 PM", "LIBRE", "PSG", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM"]}, {"name": "MARILYN", "shifts": ["06:00 AM a 02:00 PM", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM", "LIBRE", "06:00 AM a 02:00 PM", "06:00 AM a 02:00 PM"]}, {"name": "EDDY", "shifts": ["LIBRE", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM", "02:00 PM a 10:00 PM"]}], "assignments": [{"morning": [{"employee": "AILYN", "role": "Caja"}, {"employee": "MARILYN", "role": "Bar"}], "afternoon": [{"employee": "GUMMY", "role": "Bar"}, {"employee": "HILLARY", "role": "Caja"}, {"employee": "HARLEY", "role": "Salón"}], "mid": []}, {"morning": [{"employee": "AILYN", "role": "Bar"}, {"employee": "HILLARY", "role": "Caja"}], "afternoon": [{"employee": "GUMMY", "role": "Bar"}, {"employee": "MARILYN", "role": "Salón"}, {"employee": "EDDY", "role": "Caja"}], "mid": []}, {"morning": [{"employee": "AILYN", "role": "Bar"}, {"employee": "HILLARY", "role": "Caja"}], "afternoon": [{"employee": "MARILYN", "role": "Bar"}, {"employee": "HARLEY", "role": "Salón"}, {"employee": "EDDY", "role": "Caja"}], "mid": []}, {"morning": [{"employee": "AILYN", "role": "Bar"}, {"employee": "HILLARY", "role": "Caja"}], "afternoon": [{"employee": "MARILYN", "role": "Bar"}, {"employee": "EDDY", "role": "Caja"}, {"employee": "HARLEY", "role": "Salón"}], "mid": []}, {"morning": [{"employee": "AILYN", "role": "Bar"}, {"employee": "HILLARY", "role": "Caja"}], "afternoon": [{"employee": "EDDY", "role": "Caja"}, {"employee": "GUMMY", "role": "Bar"}, {"employee": "HARLEY", "role": "Salón"}], "mid": []}, {"morning": [{"employee": "HILLARY", "role": "Caja"}, {"employee": "MARILYN", "role": "Bar"}], "afternoon": [{"employee": "EDDY", "role": "Caja"}, {"employee": "GUMMY", "role": "Bar"}, {"employee": "HARLEY", "role": "Salón"}], "mid": []}, {"morning": [{"employee": "AILYN", "role": "Caja"}, {"employee": "MARILYN", "role": "Bar"}], "afternoon": [{"employee": "EDDY", "role": "Caja"}, {"employee": "GUMMY", "role": "Bar"}, {"employee": "HARLEY", "role": "Salón"}], "mid": []}]};
+const KEY = "laTerrazaFinalGitHub_20260915_v2";
+const SHIFT_STATES = ["06:00 AM a 02:00 PM","02:00 PM a 10:00 PM","11:00 AM a 07:00 PM","LIBRE","VACACIONES","PSG"];
 const ROLES = ["Caja","Bar","Salón","Caja / Bar","Apoyo"];
 const DAY_NAMES = ["LUN","MAR","MIÉ","JUE","VIE","SÁB","DOM"];
 const FULL_DAY_NAMES = ["LUNES","MARTES","MIÉRCOLES","JUEVES","VIERNES","SÁBADO","DOMINGO"];
 const MONTHS = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"];
 
-let state = {
-  date:"2026-08-31",
-  employees: JSON.parse(JSON.stringify(INITIAL.employees)),
-  assignments: JSON.parse(JSON.stringify(INITIAL.assignments))
-};
+let state = {date:"2026-08-31", employees:deepCopy(INITIAL.employees), assignments:deepCopy(INITIAL.assignments)};
 let currentImageCanvas = null;
 let currentImageName = "La_Terraza.png";
 let currentImageDataURL = "";
@@ -307,10 +325,18 @@ function escapeHtml(s) {
   return String(s ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[ch]));
 }
 function shiftClass(v) {
-  return v==="06:00 a 02:00" ? "s1" : v==="02:00 a 10:00" ? "s2" : v==="LIBRE" ? "free" : "psg";
+  if(v==="06:00 AM a 02:00 PM") return "s1";
+  if(v==="02:00 PM a 10:00 PM") return "s2";
+  if(v==="11:00 AM a 07:00 PM") return "s3";
+  if(v==="LIBRE") return "free";
+  if(v==="VACACIONES") return "vac";
+  return "psg";
 }
 function shiftLabel(v) {
-  return v==="06:00 a 02:00" ? "06:00\na 02:00" : v==="02:00 a 10:00" ? "02:00\na 10:00" : v;
+  if(v==="06:00 AM a 02:00 PM") return "06:00\na 02:00";
+  if(v==="02:00 PM a 10:00 PM") return "02:00\na 10:00";
+  if(v==="11:00 AM a 07:00 PM") return "11:00\na 07:00";
+  return v;
 }
 function setStatus(msg) {
   const el=document.getElementById("status");
@@ -353,6 +379,11 @@ function updateWeek(save=true) {
 function renderSchedule() {
   const body=document.getElementById("scheduleBody");
   body.innerHTML="";
+  if(!state.employees.length){
+    const tr=document.createElement("tr");
+    tr.innerHTML='<td colspan="9" style="padding:22px;text-align:center;background:#fafafa;color:#666;font-weight:700">No hay empleados todavía. Toca “＋ Agregar empleado”.</td>';
+    body.appendChild(tr);
+  }
   state.employees.forEach((emp,rowIndex)=>{
     const tr=document.createElement("tr");
     const nameTd=document.createElement("td");
@@ -380,12 +411,13 @@ function renderSchedule() {
       deleteBtn.setAttribute("aria-label",`Eliminar a ${newName}`);
       if(oldName!==newName){
         state.assignments.forEach(day=>{
-          ["morning","afternoon"].forEach(key=>{
+          ["morning","afternoon","mid"].forEach(key=>{
             day[key].forEach(a=>{ if(a.employee===oldName) a.employee=newName; });
           });
         });
       }
-      rebuildAssignmentEmployeeOptions();
+      syncAssignmentsFromSchedule();
+      renderAssignments();
       persist();
     });
 
@@ -409,6 +441,8 @@ function renderSchedule() {
         state.employees[rowIndex].shifts[dayIndex]=sel.value;
         td.className=`shiftCell ${shiftClass(sel.value)}`;
         td.dataset.label=shiftLabel(sel.value);
+        syncAssignmentsFromSchedule();
+        renderAssignments();
         persist();
       });
       sel.addEventListener("input",()=>sel.dispatchEvent(new Event("change")));
@@ -421,19 +455,24 @@ function renderSchedule() {
 
 function addEmployee() {
   const existing=new Set(currentNames());
-  let n=1, name="NUEVO 1";
-  while(existing.has(name)){ n++; name=`NUEVO ${n}`; }
+  let n=1, name="EMPLEADO 1";
+  while(existing.has(name)){ n++; name=`EMPLEADO ${n}`; }
   state.employees.push({name,shifts:["LIBRE","LIBRE","LIBRE","LIBRE","LIBRE","LIBRE","LIBRE"]});
-  renderSchedule(); rebuildAssignmentEmployeeOptions(); persist();
+  renderSchedule();
+  syncAssignmentsFromSchedule();
+  renderAssignments();
+  persist();
   setStatus("Empleado agregado.");
 }
 function removeEmployee(index) {
   const name=state.employees[index]?.name || "este empleado";
   if(!confirm(`¿Eliminar a ${name} del horario?`))return;
   state.employees.splice(index,1);
-  // Keep assignment rows but blank any deleted employee.
-  state.assignments.forEach(day=>["morning","afternoon"].forEach(key=>day[key].forEach(a=>{if(a.employee===name)a.employee="";})));
-  renderSchedule(); renderAssignments(); persist(); setStatus("Empleado eliminado.");
+  renderSchedule();
+  syncAssignmentsFromSchedule();
+  renderAssignments();
+  persist();
+  setStatus("Empleado eliminado.");
 }
 
 function currentNames() {
@@ -449,64 +488,140 @@ function employeeOptions(selected) {
 function roleOptions(selected) {
   let list=[...ROLES];
   if(selected && !list.includes(selected)) list.push(selected);
-  let html=list.map(r=>`<option value="${escapeHtml(r)}" ${r===selected?"selected":""}>${escapeHtml(r)}</option>`).join("");
+  let html=`<option value="" ${!selected?"selected":""}>— Seleccionar puesto —</option>`;
+  html+=list.map(r=>`<option value="${escapeHtml(r)}" ${r===selected?"selected":""}>${escapeHtml(r)}</option>`).join("");
   html+=`<option value="__OTHER__">Otro puesto…</option>`;
   return html;
 }
 
-function renderAssignments() {
-  const grid=document.getElementById("daysGrid");grid.innerHTML="";
-  const p=parseDateParts(state.date);
+
+function assignmentKeyForShift(shift) {
+  if(shift==="06:00 AM a 02:00 PM") return "morning";
+  if(shift==="02:00 PM a 10:00 PM") return "afternoon";
+  if(shift==="11:00 AM a 07:00 PM") return "mid";
+  return null;
+}
+
+function syncAssignmentsFromSchedule() {
+  ensureAssignmentStructure();
+
   state.assignments.forEach((day,dayIndex)=>{
-    const card=document.createElement("section");card.className="dayCard";
-    const title=document.createElement("div");title.className="dayTitle";
+    // Conservar el puesto que ya se eligió para esa persona ese día,
+    // incluso si luego se cambia de turno.
+    const previousRoles = new Map();
+    ["morning","afternoon","mid"].forEach(key=>{
+      day[key].forEach(a=>{
+        if(a.employee && !previousRoles.has(a.employee)){
+          previousRoles.set(a.employee, a.role || "");
+        }
+      });
+    });
+
+    const next = {morning:[], afternoon:[], mid:[]};
+
+    state.employees.forEach(emp=>{
+      const key = assignmentKeyForShift(emp.shifts?.[dayIndex]);
+      const employeeName = (emp.name || "").trim();
+      if(!key || !employeeName) return;
+
+      next[key].push({
+        employee: employeeName,
+        role: previousRoles.get(employeeName) || ""
+      });
+    });
+
+    state.assignments[dayIndex] = next;
+  });
+}
+
+function renderAssignments() {
+  syncAssignmentsFromSchedule();
+
+  const grid=document.getElementById("daysGrid");
+  grid.innerHTML="";
+  const p=parseDateParts(state.date);
+
+  state.assignments.forEach((day,dayIndex)=>{
+    const card=document.createElement("section");
+    card.className="dayCard";
+
+    const title=document.createElement("div");
+    title.className="dayTitle";
     const d=p?utcDate(p,dayIndex):null;
-    title.textContent=d?`${FULL_DAY_NAMES[dayIndex]} ${String(d.getUTCDate()).padStart(2,"0")}`:FULL_DAY_NAMES[dayIndex];
+    title.textContent=d
+      ? `${FULL_DAY_NAMES[dayIndex]} ${String(d.getUTCDate()).padStart(2,"0")}`
+      : FULL_DAY_NAMES[dayIndex];
     card.appendChild(title);
 
-    const sg=document.createElement("div");sg.className="shiftGrid";
-    [["morning","06:00 a 02:00"],["afternoon","02:00 a 10:00"]].forEach(([key,label])=>{
-      const block=document.createElement("div");block.className="shiftBlock";
-      const head=document.createElement("div");head.className="shiftHead";
-      head.innerHTML=`<span>${label}</span>`;
-      const plus=document.createElement("button");plus.type="button";plus.textContent="+";
-      plus.setAttribute("aria-label",`Agregar asignación ${label}`);
-      plus.addEventListener("click",()=>addAssignment(dayIndex,key));
-      head.appendChild(plus);block.appendChild(head);
+    const sg=document.createElement("div");
+    sg.className="shiftGrid";
 
-      const list=document.createElement("div");list.className="assignmentList";
-      if(!day[key].length) {
-        const empty=document.createElement("div");empty.className="emptyShift";empty.textContent="Sin asignaciones";list.appendChild(empty);
+    [
+      ["morning","06:00 AM a 02:00 PM"],
+      ["afternoon","02:00 PM a 10:00 PM"],
+      ["mid","11:00 AM a 07:00 PM"]
+    ].forEach(([key,label])=>{
+      const block=document.createElement("div");
+      block.className="shiftBlock";
+
+      const head=document.createElement("div");
+      head.className="shiftHead";
+      head.innerHTML=`<span>${label}</span>`;
+      block.appendChild(head);
+
+      const list=document.createElement("div");
+      list.className="assignmentList";
+
+      if(!day[key].length){
+        const empty=document.createElement("div");
+        empty.className="emptyShift";
+        empty.textContent="Sin personal en este turno";
+        list.appendChild(empty);
       }
+
       day[key].forEach((a,assignIndex)=>{
-        const row=document.createElement("div");row.className="assignmentRow";
-        const empSel=document.createElement("select");empSel.className="employeeSelect";empSel.innerHTML=employeeOptions(a.employee);
-        empSel.addEventListener("change",()=>{state.assignments[dayIndex][key][assignIndex].employee=empSel.value;persist();});
-        const roleSel=document.createElement("select");roleSel.className="roleSelect";roleSel.innerHTML=roleOptions(a.role);
+        const row=document.createElement("div");
+        row.className="assignmentRow";
+
+        const employee=document.createElement("div");
+        employee.className="employeeDisplay";
+        employee.textContent=a.employee;
+
+        const roleSel=document.createElement("select");
+        roleSel.className="roleSelect";
+        roleSel.innerHTML=roleOptions(a.role);
+
         roleSel.addEventListener("change",()=>{
           if(roleSel.value==="__OTHER__"){
-            const custom=prompt("Escribe el nombre del puesto:",a.role && !ROLES.includes(a.role)?a.role:"");
+            const custom=prompt(
+              "Escribe el nombre del puesto:",
+              a.role && !ROLES.includes(a.role) ? a.role : ""
+            );
             if(custom && custom.trim()){
               state.assignments[dayIndex][key][assignIndex].role=custom.trim();
               roleSel.innerHTML=roleOptions(custom.trim());
               roleSel.value=custom.trim();
             }else{
-              roleSel.innerHTML=roleOptions(state.assignments[dayIndex][key][assignIndex].role);
-              roleSel.value=state.assignments[dayIndex][key][assignIndex].role;
+              const current=state.assignments[dayIndex][key][assignIndex].role || "";
+              roleSel.innerHTML=roleOptions(current);
+              roleSel.value=current;
             }
           }else{
             state.assignments[dayIndex][key][assignIndex].role=roleSel.value;
           }
           persist();
         });
-        const remove=document.createElement("button");remove.type="button";remove.className="removeAssignment";remove.textContent="×";
-        remove.setAttribute("aria-label","Eliminar asignación");
-        remove.addEventListener("click",()=>removeAssignment(dayIndex,key,assignIndex));
-        row.append(empSel,roleSel,remove);list.appendChild(row);
+
+        row.append(employee,roleSel);
+        list.appendChild(row);
       });
-      block.appendChild(list);sg.appendChild(block);
+
+      block.appendChild(list);
+      sg.appendChild(block);
     });
-    card.appendChild(sg);grid.appendChild(card);
+
+    card.appendChild(sg);
+    grid.appendChild(card);
   });
 }
 function addAssignment(dayIndex,key) {
@@ -518,9 +633,8 @@ function removeAssignment(dayIndex,key,index) {
   renderAssignments();persist();
 }
 function rebuildAssignmentEmployeeOptions() {
-  document.querySelectorAll(".employeeSelect").forEach(sel=>{
-    const current=sel.value;sel.innerHTML=employeeOptions(current);
-  });
+  syncAssignmentsFromSchedule();
+  renderAssignments();
 }
 
 function syncStateFromDOM() {
@@ -531,12 +645,30 @@ function resetAll() {
   if(!confirm("¿Restaurar la plantilla original completa?"))return;
   state={date:"2026-08-31",employees:deepCopy(INITIAL.employees),assignments:deepCopy(INITIAL.assignments)};
   try{localStorage.removeItem(KEY)}catch(e){}
+  ensureAssignmentStructure();
   document.getElementById("weekStart").value=state.date;
   renderAll();setStatus("Plantilla restaurada.");
 }
+
+function ensureAssignmentStructure() {
+  if(!Array.isArray(state.assignments)) state.assignments=[];
+  while(state.assignments.length<7){
+    state.assignments.push({morning:[],afternoon:[],mid:[]});
+  }
+  state.assignments=state.assignments.slice(0,7).map(day=>({
+    morning:Array.isArray(day.morning)?day.morning:[],
+    afternoon:Array.isArray(day.afternoon)?day.afternoon:[],
+    mid:Array.isArray(day.mid)?day.mid:[]
+  }));
+}
+
 function renderAll() {
+  ensureAssignmentStructure();
   document.getElementById("weekStart").value=state.date;
-  renderSchedule();renderAssignments();updateWeek(false);
+  renderSchedule();
+  syncAssignmentsFromSchedule();
+  renderAssignments();
+  updateWeek(false);
 }
 
 function fitText(ctx,text,max,start=17,min=11) {
@@ -553,16 +685,21 @@ function drawHeader(ctx,title,range,w) {
   ctx.fillStyle="#111";ctx.fillRect(0,0,w,250);ctx.fillStyle="#c69a52";ctx.fillRect(0,247,w,3);
   const im=logoImage();
   if(im&&im.complete&&im.naturalWidth){const r=Math.min(470/im.naturalWidth,105/im.naturalHeight),dw=im.naturalWidth*r,dh=im.naturalHeight*r;ctx.drawImage(im,(w-dw)/2,16,dw,dh);}
-  ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="#efd7aa";ctx.font='400 52px Georgia';ctx.fillText(title,w/2,165);
-  ctx.fillStyle="#e1c289";ctx.font='700 20px Arial';ctx.fillText(range,w/2,215);
+  ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="#ffffff";ctx.font='400 52px Georgia';ctx.fillText(title,w/2,165);
+  ctx.fillStyle="#ddddda";ctx.font='700 20px Arial';ctx.fillText(range,w/2,215);
 }
 function drawFooter(ctx,y,w) {
   ctx.fillStyle="#111";ctx.fillRect(0,y,w,86);ctx.fillStyle="#c69a52";ctx.fillRect(0,y,w,2);
-  ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="#dab874";ctx.font='400 29px Georgia';ctx.fillText("LA TERRAZA",w/2,y+31);
-  ctx.fillStyle="#edd8b0";ctx.font='700 12px Arial';ctx.fillText("CAFÉ · BAR · RESTAURANTE",w/2,y+61);
+  ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="#ffffff";ctx.font='400 29px Georgia';ctx.fillText("LA TERRAZA",w/2,y+31);
+  ctx.fillStyle="#d8d8d4";ctx.font='700 12px Arial';ctx.fillText("CAFÉ · BAR · RESTAURANTE",w/2,y+61);
 }
 function shiftColors(v) {
-  return v==="06:00 a 02:00"?["#ddb875","#171614"]:v==="02:00 a 10:00"?["#f1e8d8","#171614"]:v==="LIBRE"?["#c9a5aa","#fff"]:["#a7b09a","#fff"];
+  if(v==="06:00 AM a 02:00 PM") return ["#D9B36C","#171614"];
+  if(v==="02:00 PM a 10:00 PM") return ["#F4E8CF","#171614"];
+  if(v==="11:00 AM a 07:00 PM") return ["#C6B2D8","#171614"];
+  if(v==="LIBRE") return ["#D7A3AD","#ffffff"];
+  if(v==="VACACIONES") return ["#93B7D1","#171614"];
+  return ["#9EB792","#ffffff"];
 }
 function renderScheduleCanvas() {
   syncStateFromDOM();
@@ -578,7 +715,7 @@ function renderScheduleCanvas() {
 
   const x=30,nameW=150,colW=(1020-nameW)/7;
   ctx.fillStyle="#191919";ctx.fillRect(x,top,1020,headH);
-  ctx.fillStyle="#f1d8aa";ctx.textAlign="center";ctx.textBaseline="middle";ctx.font="700 15px Arial";
+  ctx.fillStyle="#ffffff";ctx.textAlign="center";ctx.textBaseline="middle";ctx.font="700 15px Arial";
   ctx.fillText("COLABORADOR",x+nameW/2,top+headH/2);
   document.querySelectorAll(".dayHead").forEach((d,i)=>ctx.fillText(d.textContent,x+nameW+i*colW+colW/2,top+headH/2));
 
@@ -592,7 +729,7 @@ function renderScheduleCanvas() {
       ctx.fillStyle=pal[0];ctx.fillRect(xx,y,colW,rowH);
       ctx.fillStyle=pal[1];
       if(v.includes(" a ")){
-        ctx.font="900 18px Arial";
+        ctx.font="900 16px Arial";
         const z=v.split(" a ");
         ctx.fillText(z[0],xx+colW/2,y+rowH/2-12);
         ctx.fillText("a "+z[1],xx+colW/2,y+rowH/2+13);
@@ -621,9 +758,13 @@ function renderScheduleCanvas() {
   return c;
 }
 function renderAssignmentsCanvas() {
+  syncAssignmentsFromSchedule();
+
   const lineH = 54;
   const top = 300, footerH = 86;
-  const dayHeights = state.assignments.map(d => Math.max(2, d.morning.length, d.afternoon.length) * lineH + 66);
+  const dayHeights = state.assignments.map(d =>
+    Math.max(2, d.morning.length, d.afternoon.length, d.mid.length) * lineH + 66
+  );
   const contentH = dayHeights.reduce((a,b)=>a+b,0);
   const gaps = Math.max(0, state.assignments.length - 1) * 10;
   const cardsBottom = top + contentH + gaps;
@@ -632,45 +773,67 @@ function renderAssignmentsCanvas() {
   const height = footerTop + footerH;
 
   const c = makeCanvas(1080,height), ctx = c.getContext("2d");
-  ctx.fillStyle="#f8f1e7"; ctx.fillRect(0,0,1080,height);
+  ctx.fillStyle="#f8f1e7";
+  ctx.fillRect(0,0,1080,height);
   drawHeader(ctx,"ASIGNACIÓN DE PUESTOS",document.getElementById("range2").textContent,1080);
 
-  const x=45, w=990; let y=top;
+  const x=30,w=1020;
+  const colW=w/3;
+  let y=top;
   const p=parseDateParts(state.date);
 
   state.assignments.forEach((day,di)=>{
-    const hgt=dayHeights[di], d=utcDate(p,di), title=`${FULL_DAY_NAMES[di]} ${String(d.getUTCDate()).padStart(2,"0")}`;
-    ctx.fillStyle="#191919"; ctx.fillRect(x,y,w,46);
-    ctx.fillStyle="#f1d8aa"; ctx.textAlign="left"; ctx.textBaseline="middle"; ctx.font="900 22px Arial";
+    const hgt=dayHeights[di];
+    const d=utcDate(p,di);
+    const title=`${FULL_DAY_NAMES[di]} ${String(d.getUTCDate()).padStart(2,"0")}`;
+
+    ctx.fillStyle="#191919";
+    ctx.fillRect(x,y,w,46);
+    ctx.fillStyle="#ffffff";
+    ctx.textAlign="left";
+    ctx.textBaseline="middle";
+    ctx.font="900 22px Arial";
     ctx.fillText(title,x+15,y+23);
 
-    const colW=w/2;
-    ctx.fillStyle="#f4e5ce"; ctx.fillRect(x,y+46,colW,hgt-46);
-    ctx.fillStyle="#f8efe2"; ctx.fillRect(x+colW,y+46,colW,hgt-46);
+    const fills=["#F4E8CF","#F2EEE6","#EAE3F0"];
+    const labels=["06:00 AM a 02:00 PM","02:00 PM a 10:00 PM","11:00 AM a 07:00 PM"];
+    const keys=["morning","afternoon","mid"];
 
-    ctx.fillStyle="#5c472b"; ctx.font="900 18px Arial";
-    ctx.fillText("06:00 a 02:00",x+14,y+72);
-    ctx.fillText("02:00 a 10:00",x+colW+14,y+72);
+    for(let ci=0;ci<3;ci++){
+      const cx=x+ci*colW;
+      ctx.fillStyle=fills[ci];
+      ctx.fillRect(cx,y+46,colW,hgt-46);
 
-    [["morning",x],["afternoon",x+colW]].forEach(([key,cx])=>{
-      day[key].forEach((a,ai)=>{
+      ctx.fillStyle="#4C4033";
+      ctx.font="900 15px Arial";
+      ctx.fillText(labels[ci],cx+12,y+72);
+
+      day[keys[ci]].forEach((a,ai)=>{
         const yy=y+108+ai*lineH;
-        ctx.fillStyle="#241f19"; ctx.font="900 16px Arial";
-        const txt = `${a.employee||"—"} · ${a.role||"—"}`;
-        ctx.fillText(txt,cx+14,yy);
+        ctx.fillStyle="#241f19";
+        ctx.font="900 15px Arial";
+        const txt=`${a.employee||"—"} · ${a.role||"—"}`;
+        ctx.fillText(txt,cx+12,yy);
       });
-    });
 
-    ctx.strokeStyle="#d2bb93";
+      if(ci>0){
+        ctx.strokeStyle="#D2BB93";
+        ctx.beginPath();
+        ctx.moveTo(cx,y+46);
+        ctx.lineTo(cx,y+hgt);
+        ctx.stroke();
+      }
+    }
+
+    ctx.strokeStyle="#D2BB93";
     ctx.strokeRect(x,y,w,hgt);
-    ctx.beginPath(); ctx.moveTo(x+colW,y+46); ctx.lineTo(x+colW,y+hgt); ctx.stroke();
-    y += hgt + 10;
+    y+=hgt+10;
   });
 
   ctx.fillStyle="#42372a";
   ctx.textAlign="center";
   ctx.font="800 16px Arial";
-  ctx.fillText("Revisar la asignación antes de iniciar el turno.",540,reminderY);
+  ctx.fillText("Los nombres se cargan automáticamente según el horario. Solo selecciona el puesto.",540,reminderY);
 
   drawFooter(ctx,footerTop,1080);
   return c;
@@ -745,7 +908,7 @@ async function shareCurrentImage() {
     await navigator.share({
       files:[file],
       title:"La Terraza",
-      text:"Horario de La Terraza"
+      text:"Horario La Terraza"
     });
   } catch(e) {
     if(e && e.name === "AbortError") return;
@@ -768,9 +931,14 @@ const INITIAL_STATE_OVERRIDE = null;
   try{saved=JSON.parse(localStorage.getItem(KEY));}catch(e){}
   if(INITIAL_STATE_OVERRIDE) state=deepCopy(INITIAL_STATE_OVERRIDE);
   else if(saved && saved.employees && saved.assignments) state=saved;
+  ensureAssignmentStructure();
   document.getElementById("weekStart").value=state.date;
   renderAll();
 })();
 </script>
+<div id="buildVersion" style="display:none">SODA_BUTTONS_FIXED_20260911_V3</div>
+<div id="autoSyncBuild" style="display:none">AUTO_SYNC_BUILD_20260911</div>
+<div id="buildVersion" style="display:none">LA_TERRAZA_UNIFIED_20260915</div>
+<div id="buildVersion" style="display:none">LA_TERRAZA_GITHUB_FINAL_20260915_V2</div>
 </body>
 </html>
